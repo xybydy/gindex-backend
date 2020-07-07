@@ -153,6 +153,7 @@ router.post('/admin', function(req, res){
 									const newPendingUser = new PendingUser({
 										name: req.body.name,
 										email: req.body.email,
+										drive: 0,
 										post: "Admin",
 										message: req.body.message
 									})
@@ -168,7 +169,7 @@ router.post('/admin', function(req, res){
 												 from: `"${process.env.FRONTENDSITENAME} - Support"<${process.env.EMAILID}>`,
 												 to: adminEmails,
 												 replyTo: process.env.REPLYTOMAIL,
-												 subject: '${process.env.FRONTENDSITENAME} - Admin Request',
+												 subject: `${process.env.FRONTENDSITENAME} - Admin Request`,
 												 html: existingRequestToAdminTemplate(req.body, "Admin")
 											};
 											const userMessage = {
@@ -248,7 +249,8 @@ router.post('/superadmin', function(req, res){
 									const newPendingUser = new PendingUser({
 										name: req.body.name,
 										email: req.body.email,
-										post: "Admin",
+										post: "SuperAdmin",
+										drive: 0,
 										message: req.body.message
 									})
 									newPendingUser.save(function(error, doc){
@@ -263,7 +265,7 @@ router.post('/superadmin', function(req, res){
 												 from: `"${process.env.FRONTENDSITENAME} - Support"<${process.env.EMAILID}>`, // Sender address
 												 to: adminEmails,
 												 replyTo: process.env.REPLYTOMAIL,
-												 subject: '${process.env.FRONTENDSITENAME} - Admin Request',
+												 subject: `${process.env.FRONTENDSITENAME} - Admin Request`,
 												 html: existingRequestToAdminTemplate(req.body, "Superadmin")
 											};
 											const userMessage = {
